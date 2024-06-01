@@ -38,3 +38,17 @@ async function fetchAndDisplayWorks() {
 fetchAndDisplayWorks();
 
 
+//BOUTTONS FILTRES DU PROJET
+
+let filterProject = document.querySelector(".filterProject");
+
+let filterNames = ["Tous", "Objets", "Appartements", "Hotels & restaurants"];
+
+filterNames.forEach(names => {
+  let filters = document.createElement("button");
+  filters.innerText = names;
+  filters.className = "filter-button";// classe css des filtres
+
+  filterProject.appendChild(filters);
+});
+
