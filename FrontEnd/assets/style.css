@@ -191,7 +191,26 @@ footer nav ul {
 	BOUTTONS FILTERS
 **********************/
 
-.filter-button{
-	color: blue;
+.filterProject{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 80px;
+	margin-top: 80px;
 }
 
+.filter-button{
+	margin-right: 10px;
+	margin-left: 10px;
+	padding: 10px 20px 10px 20px;
+	font-size: 20px;
+	background-color: #fff;
+	color: rgb(100, 175, 103);
+	border-color: rgb(100, 175, 103);
+	border-radius: 25px;
+	cursor: pointer;
+}
+
+.filter-button:hover{
+	background-color: rgb(53, 88, 53);
+	color: #fff;
+}

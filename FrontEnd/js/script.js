@@ -41,6 +41,7 @@ fetchAndDisplayWorks();
 //BOUTTONS FILTRES DU PROJET
 
 let filterProject = document.querySelector(".filterProject");
+filterProject.className = "filterProject";
 
 let filterNames = ["Tous", "Objets", "Appartements", "Hotels & restaurants"];
 
