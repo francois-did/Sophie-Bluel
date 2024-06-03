@@ -12,12 +12,27 @@ async function fetchAndDisplayWorks() {
 }
 
 function displayWorks(works) {
-  gallery.innerHTML = works.map(work => `
-    <figure>
-      <img src="${work.imageUrl}" alt="${work.title}" />
-      <figcaption>${work.title}</figcaption>
-    </figure>
-  `).join('');
+  // Vider la galerie avant d'ajouter les nouvelles œuvres
+  gallery.innerHTML = '';
+
+  // Parcourir chaque œuvre et créer les éléments correspondants
+  works.forEach(work => {
+    // Créer les éléments
+    const figure = document.createElement('figure');
+    const img = document.createElement('img');
+    const figcaption = document.createElement('figcaption');
+
+    // Définir les attributs et le contenu
+    img.src = work.imageUrl;
+    figcaption.textContent = work.title;
+
+    // Ajouter les éléments au figure
+    figure.appendChild(img);
+    figure.appendChild(figcaption);
+
+    // Ajouter le figure à la galerie
+    gallery.appendChild(figure);
+  });
 }
 
 fetchAndDisplayWorks();
