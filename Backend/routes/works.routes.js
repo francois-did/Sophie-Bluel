@@ -7,6 +7,7 @@ const workCtrl = require('../controllers/works.controller');
 
 router.post('/', auth, multer, checkWork, workCtrl.create);
 router.get('/', workCtrl.findAll);
-router.delete('/:id', auth, workCtrl.delete);
+// router.delete('/:id', auth, workCtrl.delete);
+router.delete('/:id', workCtrl.delete);
 
 module.exports = router;
