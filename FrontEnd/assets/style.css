@@ -22,6 +22,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	background-color: rgb(250, 250, 243);
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -62,6 +63,14 @@ section {
 	margin: 50px 0
 }
 
+figure{
+	height: 505px;
+}
+
+.figureTitre{
+	height: auto;
+}
+
 h1{
 	display: flex;
 	flex-direction: column;
@@ -93,6 +102,7 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	cursor: pointer;
 }
 
 li:hover {
@@ -101,18 +111,21 @@ li:hover {
 #introduction {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 }
-#introduction figure {
-	flex: 1
-}
+
 #introduction img {
 	display: block;
-	margin: auto;
-	width: 80%;
+	width: 100%;
+	height: 355px;
+}
+
+#introduction figure{
+	width: 474px;
 }
 
 #introduction article {
-	flex: 1
+	width: 43%;
 }
 #introduction h2 {
 	margin-bottom: 1em;
@@ -120,6 +133,7 @@ li:hover {
 
 #introduction p {
 	margin-bottom: 0.5em;
+	width: 81%;
 }
 #portfolio h2 {
 	text-align: center;
@@ -135,6 +149,7 @@ li:hover {
 
 .gallery img {
 	width: 100%;
+	height: 100%;
 
 }
 #contact {
@@ -204,13 +219,423 @@ footer nav ul {
 	padding: 10px 20px 10px 20px;
 	font-size: 20px;
 	background-color: #fff;
-	color: rgb(100, 175, 103);
-	border-color: rgb(100, 175, 103);
+	color: #1D6154;
+	border-color: #1D6154;
 	border-radius: 25px;
 	cursor: pointer;
 }
 
 .filter-button:hover{
-	background-color: rgb(53, 88, 53);
+	background-color: #1D6154;
 	color: #fff;
+}
+
+
+/**********************
+		TABLETTE
+**********************/
+
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+	body{
+		margin-right: 50px;
+		margin-left: 50px;
+	}
+
+	#introduction figure{
+		width: 48%;
+		
+	}
+
+	#introduction img{
+		height: 320px;
+	}
+
+	#introduction h2{
+		font-size: 25px;
+	}
+
+	#introduction p{
+		font-size: 14px;
+	}
+
+
+	.filter-button{
+		font-size: 18px;
+	}
+
+}
+
+
+@media (max-width: 767px){
+	
+	header {
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 0;
+	}
+
+	header h1{
+		margin-bottom: 30px;
+		font-size: 45px;
+	}
+
+	nav li{
+		font-size: 1.6em;
+	}
+
+	#introduction {
+		flex-direction: column;
+		margin: 40px 0;
+	}
+
+	#introduction figure{
+		width: 90%;
+		margin-bottom: 30px;
+	}
+
+	#introduction img{
+		object-fit: cover;
+	}
+
+	#introduction p{
+		font-size: 20px;
+		width: 100%;
+	}
+
+	#introduction article {
+		width: 90%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+
+	section {
+		margin: 40px 35px;
+	}
+
+
+	.filterProject{
+		flex-wrap: wrap;
+	}
+
+
+
+
+	.filter-button{
+		font-size: 15px;
+		width: 40%;
+		margin-bottom: 15px;
+	}
+
+
+	#contact {
+		width: 70%;
+	}
+
+
+}
+
+
+/*************************
+		MODALE
+*************************/
+
+
+.modale{
+	width: 42%;
+    border-radius: 16px;
+	background-color: #fff;
+	display: none;
+}
+
+.modale .croix{
+	height: 20px;
+	display: flex;
+	justify-content: flex-end;
+	background-color: #fff;
+	border-radius: 16px;
+}
+
+.modale .croix p{
+	cursor: pointer;
+	margin: 20px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+i.fa-solid.fa-arrow-left{
+	cursor: pointer;
+	margin: 20px;
+	font-size: 15px;
+}
+
+.galleryContainer{
+	background-color: #fff;
+}
+
+.modaleContent{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+	background-color: #fff;
+	border-radius: 16px;
+}
+
+.modaleContent h3{
+	font-size: 30px;
+	background-color: #fff;
+	padding-bottom: 20px;
+}
+
+
+.modale .galleryContainer{
+	background-color: #fff;
+	width: 70%;
+	display: flex;
+	flex-wrap: wrap;
+	height: 470px;
+	overflow-y: auto;
+}
+
+.modale .galleryContainer img{
+	width: 100%;
+	height: 110px;
+	display: flex;
+	background-color: #fff;
+	object-fit: cover;
+}
+
+.borderBottom{
+	border: 1px solid black;
+	width: 70%;
+}
+
+.addPhoto{
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+	background-color: #fff;
+	
+}
+
+.addPhoto button{
+	width: 237px;
+	height: 36px;
+	top: 1267px;
+	left: 600px;
+	gap: 0px;
+	font-weight: bold;
+	border-radius: 25px;
+	opacity: 0px;
+	margin-bottom: 30px;
+	background-color: #1D6154;
+	color: #fff;
+	cursor: pointer;
+}
+
+.divImagesContent{
+	background-color: #fff;
+	height: 110px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	width: 17%;
+}
+
+.modaleBackground{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+	justify-content: center;
+	align-items: center; 
+}
+
+.divImagesContent {
+	position: relative;
+	display: inline-block;
+  }
+  
+  .divImagesContent img {
+	display: block;
+	width: 100%; 
+  }
+  
+  .iconContainer {
+	position: absolute;
+	top: 10px;
+	right: 10px; 
+	background: rgba(0, 0, 0, 0.5);
+}
+
+#trashId{
+	cursor: pointer;
+	background-color: black;
+	padding: 3px;
+	color: #fff;
+}
+
+/***************************
+		DEUXIEME MODALE
+***************************/		
+
+.pictureAddContainer{
+	display: none;
+	justify-content: space-between;
+	flex-direction: column;
+	background-color: #fff;
+	width: 70%;
+}
+
+
+
+.modaleTitle{
+	font-size: 30px;
+	background-color: #fff;
+	margin-bottom: 30px;
+}
+
+
+.cadreAddPhoto{
+	height: 190px;
+	background-color: rgb(225, 240, 240);
+	margin-top: -10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	margin-bottom: 30px;
+}
+
+form#formModale{
+	display: flex;
+	flex-direction: column;
+	background-color: rgb(225, 240, 240);
+	align-items: center;
+	justify-content: space-around;
+}
+
+label#modale{
+	background-color: #fff;
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+
+.inputTitre{
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+.inputTitreAndCategorie{
+	margin-bottom: 30px;
+	background-color: #fff;
+}
+
+.inputCategories{
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.inputTitreAndCategorie input{
+	height: 40px;
+	border: none;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.fa-regular, .far{
+	font-size: 80px;
+	color: rgb(161, 148, 148);
+	background-color: rgb(225, 240, 240);
+	margin-bottom: 10px;
+}
+
+button#ajouterphoto{
+	font-size: 20px;
+	color: rgb(49, 68, 82);
+	border-radius: 50px;
+	padding: 6px 23px 6px 23px;
+}
+
+.cadreAddPhoto p{
+	background-color: rgb(225, 240, 240);
+	margin-bottom: 10px;
+}
+
+.borderBottomDeux{
+	border: 1px solid black;
+	width: 100%;
+	margin-top: 40px;
+}
+
+.valider{
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+}
+
+.btnValider{
+	margin-top: 20px;
+	width: 237px;
+	border-radius: 25px;
+	/* background-color: #1D6154; */
+	background-color: rgb(177, 171, 171);
+	color: #fff;
+	cursor: pointer;
+	height: 36px;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.errorMessage{
+	margin-bottom: 10px;
+	font-size: 22px;
+	color: red;
+	background-color: #fff;
+	display: none;
+}
+
+#labelFile{
+	font-size: 20px;
+	color: rgb(49, 68, 82);
+	border-radius: 50px;
+	padding: 6px 23px 6px 23px;
+	background-color: rgb(161, 148, 148);
+	margin-bottom: 10px;
+}
+
+input#fileInput{
+	display: none;
+}
+
+.cadreimgSelectionne{
+	background-color: #fff;
+}
+
+.cadreimgSelectionne img{
+	width: 200px;
+	height: 180px;
+	margin: auto;
+	display: block;
+	object-fit: cover;
+}
+
+.cadreimgSelectionne{
+	display: none;
+}
+
+select#category{
+	background-color: #fff;
+	height: 40px;
+	border: none;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }

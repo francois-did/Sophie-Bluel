@@ -7,9 +7,12 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
+	<link rel="icon" href="./assets/icons/favicon/">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="js/script.js" defer></script>
+	<script src="js/script.js" type="module" defer></script>
 </head>
 <body>
 <header>
@@ -18,14 +21,16 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			<li id="loginLien">login</li>
+			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li> 
+			<li id="adminText"></li>
 		</ul>
 	</nav>
 </header>
 <main>
+
 	<section id="introduction">
-		<figure>
+		<figure class="figureTitre">
 			<img src="./assets/images/sophie-bluel.png" alt="">
 		</figure>
 		<article>
@@ -36,7 +41,10 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+
+	
+		  
+		<h2>Mes projets</h2>
 		<div class="filterProject">
 			
 		</div>
@@ -67,5 +75,87 @@
 		</ul>
 	</nav>
 </footer>
+
+
+<!-- MODALES -->
+<div class="modaleBackground">
+
+
+<div class="modale">
+	
+	<div class="croix">
+		<i class="fa-solid fa-arrow-left" id="arrowLeft" style="display: none;"></i>
+		<p>X</p>
+	</div>
+
+	<div class="modaleContent">
+
+		<div class="modaleTitle">
+			 <h3>Galerie photo</h3>
+			 
+		</div>
+		
+		<p class="errorMessage">erreur dans le formulaire</p>
+		 <div class="galleryContainer"></div> <!-- 1ère modale galerie d'images projet -->
+
+			
+		 <div class="pictureAddContainer"> <!--  deuxième modale -->
+			<div class="cadreAddPhoto">
+				
+				<form action="" method="POST" enctype="multipart/form-data" id="formModale">
+					<i class="fa-regular fa-image" id="iconFile"></i>
+					<label for="fileInput" id="labelFile">+ Ajouter photo</label>
+					<input type="file" id="fileInput" name="image" accept=".jpg, .png" > 
+					
+					<div class="cadreimgSelectionne">
+						<img src="#" alt="" id="imageMiniature">
+					</div>
+					<p id="fileP">jpg, png : 4mo max</p>
+			</div>
+
+		
+			<!-- input du formulaire -->
+			<div class="inputTitreAndCategorie">
+				
+					<div class="inputTitre">
+						<label for="titre" id="modale">Titre</label>
+						<input type="text" id="titre" name="titre">
+					</div>
+		
+					<div class="inputCategories">
+						<label for="category" id="modale">Catégorie</label>
+						<select name="category" id="category" > 
+							
+						</select>
+					</div>
+		
+					<div class="borderBottomDeux"></div>
+		
+					<div class="valider">
+						<button class="btnValider" id="btnValider" type="submit">valider</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+
+
+		<div class="borderBottom"></div>
+		
+	
+	<div class="addPhoto">
+		<button class="btnAddPhoto" id="btnAddPhoto" type="submit">Ajouter une photo</button>
+	</div>
+</div>	
+</div>
+
+</div>
+
+
+
+
+
+
+
 </body>
 </html>
