@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../login/connexion.css">
+    <link rel="icon" href="favicon.ico/">
+    <title>Login</title>
+</head>
+<body>
+    <header>
+        <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+        <nav>
+            <ul>
+                <li id="projetsLink">projets</li>
+                <li>contact</li>
+                <li id="loginList">login</li>
+                <li><img src="./images/instagram.png" alt="Instagram"></li>
+                <li id="adminList"></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="loginContainer">
+            <div class="loginContainerTitre">
+                <h2>Log in</h2>
+                <p></p>
+            </div>
+
+           
+            <!-- Formulaire -->
+            <form action="submit" method="post" id="formLogin">
+                <div class="inputLabel">
+                    <div class="labelTxt">
+                        <label for="inputUsername">E-mail</label>
+                        <span id="errorUsername"></span>
+                        <input type="email" name="username" id="inputUsername" required>
+                    </div>
+                    
+                    <div class="labelTxt">
+                        <label for="inputPassword">Mot de passe</label>
+                        <input type="password" name="password" id="inputPassword" required>
+                        <div class="errorPassword"></div>
+                    </div>
+            
+                    <button type="submit" id="buttonSubmit">Se connecter</button>
+                    <a href=""><p>Mot de passe oublié</p></a>
+                </div>
+            </form>
+        </div> 
+    </main>
+    
+    <footer>
+        <div class="mentionsLégales">
+            <a href="">
+                <p>Mentions légales</p>
+            </a>
+        </div>
+    </footer>
+
+    <script src="login.js"></script>
+</body>
+</html>
