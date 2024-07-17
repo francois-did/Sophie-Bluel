@@ -1,36 +1,37 @@
+// categories = api/categories  
+// category = chaque éléménts dans l'api/categories
+
+// worksData = api/works
+// work = chaque éléments de la galerie
+
 const gallery = document.querySelector('.gallery');
 let worksData = [];
 
+// Récupération des donnés works dans l'API
 async function fetchAndDisplayWorks() {
-  try {
-    const response = await fetch('http://localhost:5678/api/works');
+
+    const response = await fetch('http://localhost:5678/api/works'); 
     worksData = await response.json();
     displayWorks(worksData);
-  } catch (error) {
-    console.error('Erreur lors de la récupération des données de l\'API :', error);
-  }
 }
 
+// Création dynamique des éléments 
 function displayWorks(works) {
   
   gallery.innerHTML = '';
 
-  // Parcourir chaque œuvre et créer les éléments correspondants
+  // Créer les éléments
   works.forEach(work => {
-    // Créer les éléments
     const figure = document.createElement('figure');
     const img = document.createElement('img');
     const figcaption = document.createElement('figcaption');
 
-   
     img.src = work.imageUrl;
     figcaption.textContent = work.title;
 
-    // Ajouter les éléments au figure
     figure.appendChild(img);
     figure.appendChild(figcaption);
 
-    // Ajouter le figure à la galerie
     gallery.appendChild(figure);
   });
 }
@@ -38,6 +39,7 @@ function displayWorks(works) {
 fetchAndDisplayWorks();
 
 
+// Création dynamique des boutons des filtrage
 const filterContainer = document.querySelector(".filterProject");
 
 async function getFilter (){
@@ -55,7 +57,7 @@ function filterData (categories){
     button.id = "Tous";
     filterContainer.appendChild(button);
 
-  if(categories && categories.length > 0){
+  
     
 
     categories.forEach((category) => {
@@ -67,7 +69,7 @@ function filterData (categories){
     })
 
     
-  }
+ 
 }
 
 filterData(categories);
@@ -75,46 +77,58 @@ filterData(categories);
 
 const buttonAll = document.getElementById("Tous");
 
-
-
-
+//Ajout/enlever la couleur du bouton au click
 buttonAll.addEventListener("click", () => {
+  document.querySelectorAll(".filter-button").forEach(btn => {
+    btn.classList.remove("active");
+  });
+  buttonAll.classList.add("active");
   fetchAndDisplayWorks();
 })
 
-
-// categories = api/categories  
-// category = chaque éléménts dans l'api/categories
-
-// worksData = api/works
-// work = chaque éléments de la galerie
-
-
+//Filtrer les catégories au click du bouton
 categories.forEach((category) => {
   const button = document.getElementById(category.id);
 
   button.addEventListener("click", () => {
-    const filteredWorks = worksData.filter((work) => {
 
+    document.querySelectorAll(".filter-button").forEach(btn => {
+      btn.classList.remove("active");
+    });
+    button.classList.add("active");
+    
+    const filteredWorks = worksData.filter((work) => {
+     
       return work.categoryId === category.id;
 
-    });
+      });
+
     displayWorks(filteredWorks);
   });
 });
 
 
-// aller vers la page login
 
-async function loginLien(){
+// aller vers la page login
+// Aller vers la page login
+function Logout() {
   const loginLien = document.getElementById("loginLien");
-  loginLien.addEventListener("click", () =>{
-    window.location.href = "login/connexion.html"
+  loginLien.addEventListener("click", () => {
+    if (localStorage.getItem('token') !== null) {
+      localStorage.removeItem('token');
+      loginLien.textContent = "Login";
+      window.sessionStorage.admin = false;
+      window.location.href = "index.html";
+    } else {
+      window.location.href = "login/connexion.html";
+    }
   });
-  
 }
 
-loginLien();
+Logout();
+
+
+
 
 
 
@@ -151,8 +165,8 @@ afficherModale();
 
 
 
-//première modale
 
+//première modale
 function premiereModale() {
   let galleryContent = document.querySelector(".galleryContainer"); 
   galleryContent.innerHTML = "";
@@ -190,16 +204,17 @@ function deletePictures() {
   const trashAll = document.querySelectorAll(".fa-trash-can");
   trashAll.forEach(trash => {
     trash.addEventListener("click", (e) => {
+      const token = localStorage.getItem('token');
       const id = trash.id;
       const supprMethod = {
         method: "DELETE",
-        headers: { "Content-Type": "application/json", "authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4" },
+        headers: { "Content-Type": "application/json", "authorization" : token },
         
       };
 
       fetch("http://localhost:5678/api/works/" + id, supprMethod)
         .then((response) => {
-          return response.json();
+         // return response.json();
         })
         .then((data) => {
           // Supprimer l'élément
@@ -243,6 +258,7 @@ function DeuxiemeModale(){
   arrowLeft.addEventListener("click", () =>{
     pictureAddContainer.style.display = "none";
     galleryContainer.style.display = "block";
+    modaleTitle.textContent = "Galerie photo";
     btnAddPhoto.style.display = "block";
     borderBottom.style.display = "block";
     arrowLeft.style.display = "none";
@@ -255,30 +271,17 @@ DeuxiemeModale();
 
 
 
-async function adminCo() {
-  let isAdmin = window.sessionStorage.admin;
-  let loginLien = document.getElementById("loginLien");
- 
-
-  if (isAdmin) {
-          
-          let adminText = document.getElementById("adminText");
-          adminText.textContent = "Admin";
-          loginLien.textContent = "Logout";
-         
-}
-}
-
-
-adminCo();
-
-
 
 //Ajouter des projets
 async function addPhoto(event) {
   event.preventDefault();
-  validateForm();
+  // validateForm();
+  const isValid = await validateForm();
+  if (!isValid) {
+    return; 
+  }
   
+
   const inputTitre = document.getElementById("titre").value;
   const fileInput = document.getElementById("fileInput").files[0];
   const categorySelect = document.getElementById("category").value;
@@ -291,31 +294,23 @@ async function addPhoto(event) {
   const token = localStorage.getItem('token');
   const authorisation = "Bearer " + token;
 
-  try {
-    const response = await fetch("http://localhost:5678/api/works", {
-      method: "POST",
-      headers: {
-        'Authorization': authorisation,
-        'Accept': 'application/json'
-      },
-      body: formData
-    });
+  const response = await fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    headers: {
+      'Authorization': authorisation,
+      'Accept': 'application/json'
+    },
+    body: formData
+  });
 
-    const responseBody = await response.json();
-    console.log('Corps de la réponse:', responseBody);
+  const responseBody = await response.json();
+  
 
-    if (response.ok) {
-      console.log('Ajout réussi:', responseBody);
-      await fetchAndDisplayWorks(); // Rafraîchir les données après l'ajout
-      premiereModale(); 
-      formModale.reset();
-    } else {
-      console.error(`Erreur lors de l'ajout: ${response.status}`, responseBody);
-    }
-  } catch (error) {
-    console.error('Erreur lors de la requête:', error);
-  }
+ 
+   
+    
 }
+
 
 const formModale = document.getElementById("formModale");
 formModale.addEventListener("submit", addPhoto);
@@ -366,44 +361,66 @@ function addImages(){
     }
   });
 }
-
 addImages()
 
-async function validateForm(){
-  
+
+// Conditions de validation du formulaire
+async function validateForm() {
   const errorMessage = document.querySelector(".errorMessage");
   const inputTitre = document.getElementById("titre");
   const fileInput = document.getElementById("fileInput");
+  const btnValider = document.getElementById("btnValider");
 
-  if(fileInput.value === "" && inputTitre.value === ""){
+  errorMessage.style.display = "none"; // Réinitialiser les messages d'erreur
+
+  if (!fileInput.files.length && inputTitre.value === "") {
     errorMessage.style.display = "block";
     errorMessage.textContent = "Veuillez remplir le formulaire";
-    return 
+    return false;
   }
 
-  if(fileInput.value === ""){
+  if (!fileInput.files.length) {
     errorMessage.style.display = "block";
-    errorMessage.textContent = "Veuillez ajouter une image"
-    return 
+    errorMessage.textContent = "Veuillez ajouter une image";
+    return false;
   }
 
-  if(inputTitre.value === ""){
+  const file = fileInput.files[0];
+  if (file.size > 4 * 1024 * 1024) { 
+    errorMessage.style.display = "block";
+    errorMessage.textContent = "L'image doit faire moins de 4 Mo";
+    return false;
+  }
+
+  if (inputTitre.value === "") {
     errorMessage.style.display = "block";
     errorMessage.textContent = "Veuillez ajouter un titre";
-    return 
+    return false;
   }
 
-  if(inputTitre.value !== "" && fileInput.value !== ""){
-      errorMessage.style.display = "none";
-      const btnValider = document.getElementById("btnValider");
-      console.log("bonjouuuur");
-      btnValider.style.backgroundColor = "green";
-    return
-  }
-
+  btnValider.style.backgroundColor = "green";
+  return true;
 }
 
 
+// Gestion de l'administration et de la connexion
+async function adminCo() {
+  let isAdmin = sessionStorage.getItem("admin");
+  let adminText = document.getElementById("adminText");
+
+  if (isAdmin === "true") {
+    adminText.textContent = "Admin";
+  } else {
+    adminText.textContent = "";
+  }
+
+  const loginLien = document.getElementById("loginLien");
+  if (localStorage.getItem("token") !== null) {
+    loginLien.textContent = "Logout";
+  }
+}
+
+adminCo();
 
 
 

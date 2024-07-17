@@ -230,6 +230,10 @@ footer nav ul {
 	color: #fff;
 }
 
+.filter-button.active {
+    background-color: #1D6154;
+    color: #fff;
+  }
 
 /**********************
 		TABLETTE
