@@ -371,36 +371,43 @@ async function validateForm() {
   const fileInput = document.getElementById("fileInput");
   const btnValider = document.getElementById("btnValider");
 
+  function showError(message) {
+    errorMessage.style.display = "block";
+    errorMessage.textContent = message;
+    setTimeout(() => {
+      errorMessage.style.display = "none";
+    }, 3000);
+  }
+
   errorMessage.style.display = "none"; // Réinitialiser les messages d'erreur
 
   if (!fileInput.files.length && inputTitre.value === "") {
-    errorMessage.style.display = "block";
-    errorMessage.textContent = "Veuillez remplir le formulaire";
+    showError("Veuillez remplir le formulaire");
     return false;
   }
 
   if (!fileInput.files.length) {
-    errorMessage.style.display = "block";
-    errorMessage.textContent = "Veuillez ajouter une image";
+    showError("Veuillez ajouter une image");
     return false;
   }
 
   const file = fileInput.files[0];
   if (file.size > 4 * 1024 * 1024) { 
-    errorMessage.style.display = "block";
-    errorMessage.textContent = "L'image doit faire moins de 4 Mo";
+    showError("L'image doit faire moins de 4 Mo");
+    fileInput.value = ""; // Réinitialiser le champ de fichier
     return false;
   }
 
   if (inputTitre.value === "") {
-    errorMessage.style.display = "block";
-    errorMessage.textContent = "Veuillez ajouter un titre";
+    showError("Veuillez ajouter un titre");
+    fileInput.value = "";
     return false;
   }
 
   btnValider.style.backgroundColor = "green";
   return true;
 }
+
 
 
 // Gestion de l'administration et de la connexion
